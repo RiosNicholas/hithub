@@ -1,4 +1,4 @@
-import SpotifyLogo from '../../public/spotify.png'
+import SpotifyLogo from '../assets/spotify.png'
 const Header = () => {
     return (
         <div className='flex justify-center align-middle px-4 py-2'>
