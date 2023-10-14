@@ -1,39 +1,40 @@
 import { useState, useEffect } from "react";
 
-const List = () => {
+const List = ( accessToken ) => {
     const[topTracks, setTopTracks] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
-    useEffect(() => {
-        response = fetch()
+    // useEffect(() => {
+    //     response = fetch()
 
-        setTopTracks(response);
-    }, []);
+    //     setTopTracks(response);
+    // }, []);
     
     return (
         <>
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search top tracks"
+                className="w-1/2 font-medium italic py-1 px-3 rounded-md"
                 //   onChange={(inputString) => searchItems(inputString.target.value)}
             />
             
-            <table>
-                <thead>
+            <table className="my-3">
+                <thead className="border border-green-950 bg-green-800 text-white">
                     <tr>
-                        <th>#</th>
-                        <th>Track</th>
-                        <th>Artist</th>
-                        <th>Album</th>
+                        <th className="border-green-950 border">#</th>
+                        <th className="border border-green-950">Track</th>
+                        <th className="border border-green-950">Artist</th>
+                        <th className="border border-green-950">Album</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="border border-gray-200 text-black bg-white">
                     {topTracks.map((track, index) => (
                         <tr key={track.id}>
-                            <td>{index + 1}</td>
-                            <td>{track.name}</td>
-                            <td>{track.artist}</td>
-                            <td>{track.album}</td>
+                            <td className="border border-gray-200">{index + 1}</td>
+                            <td className="border border-gray-200">{track.name}</td>
+                            <td className="border border-gray-200">{track.artist}</td>
+                            <td className="border border-gray-200">{track.album}</td>
                         </tr>
                     ))}
                 </tbody>

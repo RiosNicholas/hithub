@@ -55,7 +55,12 @@ function App() {
           <div className="col-span-3">
             <Card 
               title='Top Tracks of the Month'
-              // content={List}
+              content={
+                <List 
+                  accessToken = {accessToken}
+                />
+                
+              }
               className='col-span-3'
             />
           </div> 
