@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react';
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 import './App.css'
 import Header from './components/Header'
@@ -15,12 +15,21 @@ function App() {
         <NavBar />
       </aside>
       <main className="mx-10 my-4 grid grid-cols-3 gap-4">
-          <Card />
-          <Card />
-          <Card />
-          <div className="col-span-3">
-            <Card className="h-full"/>
-          </div>
+          <Card 
+            title='Top Artist' 
+          />
+          <Card 
+            title='Top Genre' 
+          />
+          <Card 
+            title='Minutes Played' 
+          />
+          <section className="col-span-3">
+            <Card 
+              title='Top Tracks of the Month'
+              content={List}
+            />
+          </section>
       </main>
     </div>
   )
