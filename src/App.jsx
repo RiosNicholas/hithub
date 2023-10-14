@@ -9,12 +9,12 @@ import NavBar from './components/NavBar'
 function App() {
 
   return (
-    <div className="flex">
-      <aside className="bg-gray-700 bg-opacity-40 py-10 h-screen flex flex-col items-center">
+    <div className="flex w-screen h-screen">
+      <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/6">
         <Header />
         <NavBar />
       </aside>
-      <main className="mx-10 my-4 grid grid-cols-3 gap-4">
+      <main className="mx-10 my-4 grid grid-cols-3 gap-4 w-5/6">
           <Card 
             title='Top Artist' 
           />
@@ -24,15 +24,17 @@ function App() {
           <Card 
             title='Minutes Played' 
           />
-          <section className="col-span-3">
+          <div className="col-span-3">
             <Card 
               title='Top Tracks of the Month'
               content={List}
+              className='col-span-3'
             />
-          </section>
+          </div> 
       </main>
     </div>
-  )
+
+  );
 }
 
 export default App

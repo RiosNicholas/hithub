@@ -10,7 +10,7 @@ const List = () => {
     }, []);
     
     return (
-        <div>
+        <>
             <input
                 type="text"
                 placeholder="Search..."
@@ -18,7 +18,6 @@ const List = () => {
             />
             
             <table>
-                <h2>Top Tracks of the Month</h2>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -38,7 +37,7 @@ const List = () => {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 }
 
