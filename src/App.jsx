@@ -1,5 +1,6 @@
 import React from 'react';
-const API_KEY = import.meta.env.VITE_APP_API_KEY;
+const CLIENT_ID = import.meta.env.CLIENT_ID; 
+const CLIENT_SECRET = import.meta.env.CLIENT_SECRET;
 import './App.css'
 import Header from './components/Header'
 import Card from './components/Card'

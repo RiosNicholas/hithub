@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const List = () => {
     const[topTracks, setTopTracks] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
 
     useEffect(() => {
         response = fetch()
