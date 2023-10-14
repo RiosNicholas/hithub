@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID; 
 const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
 import './App.css'
@@ -8,6 +8,8 @@ import List from './components/List'
 import NavBar from './components/NavBar'
 
 function App() {
+  const [accessToken, setAccessToken] = useState("");
+
   useEffect(() => {
     // Spotify API Access Token
     let authParameters = {
@@ -16,7 +18,8 @@ function App() {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-    };
+    }
+
     fetch('https://accounts.spotify.com/api/token', authParameters)
       .then(response => {
         if (!response.ok) {
@@ -24,9 +27,14 @@ function App() {
         }
         return response.json();
       })
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
+      .then(data => setAccessToken(data.access_token))
+      .catch(error => console.error('Error:', error))
   }, [])
+
+  /* SEARCH */
+  const search = async() => {
+    // Get req
+  }
 
   return (
     <div className="flex w-screen h-screen">
