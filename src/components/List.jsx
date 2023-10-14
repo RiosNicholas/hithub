@@ -12,12 +12,14 @@ const List = ( accessToken ) => {
     
     return (
         <>
-            <input
-                type="text"
-                placeholder="Search top tracks"
-                className="w-1/2 font-medium italic py-1 px-3 rounded-md"
-                //   onChange={(inputString) => searchItems(inputString.target.value)}
-            />
+            <div className="flex justify-center">
+                <input
+                    type="text"
+                    placeholder="Search top tracks"
+                    className="w-1/2 font-medium italic py-1 px-3 rounded-md shadow-sm shadow-gray-900/20"
+                    //   onChange={(inputString) => searchItems(inputString.target.value)}
+                />
+            </div>
             
             <table className="my-3">
                 <thead className="border border-green-950 bg-green-800 text-white">
