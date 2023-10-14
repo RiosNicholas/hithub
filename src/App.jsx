@@ -1,6 +1,6 @@
-import React from 'react';
-const CLIENT_ID = import.meta.env.CLIENT_ID; 
-const CLIENT_SECRET = import.meta.env.CLIENT_SECRET;
+import React, { useEffect } from 'react';
+const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID; 
+const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
 import './App.css'
 import Header from './components/Header'
 import Card from './components/Card'
@@ -8,6 +8,25 @@ import List from './components/List'
 import NavBar from './components/NavBar'
 
 function App() {
+  useEffect(() => {
+    // Spotify API Access Token
+    let authParameters = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
+    };
+    fetch('https://accounts.spotify.com/api/token', authParameters)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to retrieve access token');
+        }
+        return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+  }, [])
 
   return (
     <div className="flex w-screen h-screen">
@@ -28,7 +47,7 @@ function App() {
           <div className="col-span-3">
             <Card 
               title='Top Tracks of the Month'
-              content={List}
+              // content={List}
               className='col-span-3'
             />
           </div> 
