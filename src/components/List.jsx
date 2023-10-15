@@ -1,14 +1,47 @@
 import { useState, useEffect } from "react";
 
 const List = ( accessToken ) => {
-    const[topTracks, setTopTracks] = useState([]);
+    const [topTracks, setTopTracks] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
-    // useEffect(() => {
-    //     response = fetch()
+    // FIXME: Results in 400 error
+    useEffect(() => {
 
-    //     setTopTracks(response);
-    // }, []);
+        getTopTracks(accessToken)
+            .then((topTracks) => {
+                setTopTracks
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            });
+    }, [accessToken]);
+    const getTopTracks = async (accessToken) => {
+        try {
+            // API endpoint for top tracks
+            const endpoint = 'https://api.spotify.com/v1/me/top/tracks';
+
+            // Define the request headers with the access token for authentication.
+            const headers = {
+                Authorization: `Bearer ${accessToken}`,
+            };
+
+            // Make the GET request to the Spotify API.
+            const response = await fetch(endpoint, { headers });
+
+            if (response.status === 200) {
+                const data = await response.json();
+
+                const topTracks = data.items;
+                return topTracks;
+            } else {
+                console.error(`Error: Status ${response.status}`);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    };
     
     return (
         <>
