@@ -38,11 +38,11 @@ function App() {
 
   return (
     <div className="flex w-screen h-screen">
-      <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/6">
+      <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/4 lg:w-1/6">
         <Header />
         <NavBar />
       </aside>
-      <main className="mx-10 my-4 grid grid-cols-3 gap-4 w-5/6">
+      <main className="mx-10 my-4 grid grid-cols-3 gap-4 w-3/4 lg:w-5/6">
           <Card 
             title='Top Artist' 
           />
