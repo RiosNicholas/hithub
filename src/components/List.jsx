@@ -18,11 +18,11 @@ const List = ( accessToken ) => {
     const getTopTracks = async (accessToken) => {
         try {
             // API endpoint for top tracks
-            const endpoint = 'https://api.spotify.com/v1/me/top/tracks';
+            const endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50';
 
             // Define the request headers with the access token for authentication.
             const headers = {
-                Authorization: `Bearer ${accessToken}`,
+                'Authorization': 'Bearer ' + accessToken
             };
 
             // Make the GET request to the Spotify API.
@@ -32,14 +32,13 @@ const List = ( accessToken ) => {
                 const data = await response.json();
 
                 const topTracks = data.items;
-                return topTracks;
+                setTopTracks(topTracks);
             } else {
                 console.error(`Error: Status ${response.status}`);
-                return null;
+                console.log(await response.json());
             }
         } catch (error) {
             console.error('Error:', error);
-            return null;
         }
     };
     
@@ -66,10 +65,10 @@ const List = ( accessToken ) => {
                 <tbody className="border border-gray-200 text-black bg-white">
                     {topTracks.map((track, index) => (
                         <tr key={track.id}>
-                            <td className="border border-gray-200">{index + 1}</td>
-                            <td className="border border-gray-200">{track.name}</td>
-                            <td className="border border-gray-200">{track.artist}</td>
-                            <td className="border border-gray-200">{track.album}</td>
+                            <td className="border border-gray-200 overflow-clip">{index + 1}</td>
+                            <td className="border border-gray-200 overflow-clip">{track.name}</td>
+                            <td className="border border-gray-200 overflow-clip">{track.artist}</td>
+                            <td className="border border-gray-200 overflow-clip">{track.album}</td>
                         </tr>
                     ))}
                 </tbody>
