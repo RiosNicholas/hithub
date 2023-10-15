@@ -4,43 +4,37 @@ const List = ( accessToken ) => {
     const [topTracks, setTopTracks] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
-    // FIXME: Results in 400 error
     useEffect(() => {
+        // FIXME: Results in 400 error
+        const getTopTracks = async (accessToken) => {
+            try {
+                // API endpoint for top tracks
+                const endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50';
+                
+                // Define the request headers with the access token for authentication.
+                const headers = {
+                    'Authorization': 'Bearer ' + accessToken
+                };
+                
+                // Make the GET request to the Spotify API.
+                const response = await fetch(endpoint, { headers });
+                
+                if (response.status === 200) {
+                    const data = await response.json();
+                    
+                    const tracks = data.items;
+                    setTopTracks(tracks);
+                } else {
+                    console.error(`Error: Status ${response.status}`);
+                    console.log(await response.json());
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
 
         getTopTracks(accessToken)
-            .then((topTracks) => {
-                setTopTracks
-            })
-            .catch((error) => {
-                console.error('Error:', error)
-            });
     }, [accessToken]);
-    const getTopTracks = async (accessToken) => {
-        try {
-            // API endpoint for top tracks
-            const endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50';
-
-            // Define the request headers with the access token for authentication.
-            const headers = {
-                'Authorization': 'Bearer ' + accessToken
-            };
-
-            // Make the GET request to the Spotify API.
-            const response = await fetch(endpoint, { headers });
-
-            if (response.status === 200) {
-                const data = await response.json();
-
-                const topTracks = data.items;
-                setTopTracks(topTracks);
-            } else {
-                console.error(`Error: Status ${response.status}`);
-                console.log(await response.json());
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
     
     return (
         <>
