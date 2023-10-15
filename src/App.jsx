@@ -31,11 +31,14 @@ function App() {
       .catch(error => console.error('Error:', error))
   }, [])
 
-  /* SEARCH */
-  const search = async() => {
-    // Get req
-  }
+  const fetchProfile = async(token) => {
+    const result = await fetch("https://api.spotify.com/v1/me", {
+        method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+    });
 
+    return await result.json();
+  }
+  
   return (
     <div className="flex w-screen h-screen">
       <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/4 lg:w-1/6">
