@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     // Spotify API Access Token
-    let authParameters = {
+    const authParameters = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -31,12 +31,28 @@ function App() {
       .catch(error => console.error('Error:', error))
   }, [])
 
-  const fetchProfile = async(token) => {
-    const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
-    });
+  /* SPOTIFY ACCOUNT AUTHENTICATION */
+  const redirectToAuthCodeFlow = async(CLIENT_ID) => {
+    // TODO
+  }
 
-    return await result.json();
+  /* FETCH USER PROFILE WITH ACCESS TOKEN */
+  const fetchProfile = async(token) => {
+    try {
+      const result = await fetch("https://api.spotify.com/v1/me", {
+          method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+      });
+      
+      if (result.ok) {
+        const profileData = await result.json();
+        return profileData;
+      } else {
+        throw new Error('Failed to fetch user profile');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
   }
   
   return (
