@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const List = ( accessToken ) => {
+const List = ({ accessToken }) => {
     const [topTracks, setTopTracks] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
