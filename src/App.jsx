@@ -6,15 +6,17 @@ import Header from './components/Header'
 import Card from './components/Card'
 import List from './components/List'
 import NavBar from './components/NavBar'
+import Authentication from './components/Authentication';
 
 function App() {
+  
   const [accessToken, setAccessToken] = useState("");
-
   useEffect(() => {
     // Spotify API Access Token
     const authParameters = {
       method: 'POST',
       headers: {
+        'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET),
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
@@ -33,14 +35,15 @@ function App() {
 
   /* SPOTIFY ACCOUNT AUTHENTICATION */
   const redirectToAuthCodeFlow = async(CLIENT_ID) => {
-    // TODO
+    //TODO
   }
 
   /* FETCH USER PROFILE WITH ACCESS TOKEN */
   const fetchProfile = async(token) => {
     try {
       const result = await fetch("https://api.spotify.com/v1/me", {
-          method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+        method: "GET", 
+        headers: { Authorization: 'Bearer ' + accessToken }
       });
       
       if (result.ok) {
@@ -60,6 +63,7 @@ function App() {
       <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/4 lg:w-1/6">
         <Header />
         <NavBar />
+        <Authentication />
       </aside>
       <main className="mx-10 my-4 grid grid-cols-3 gap-4 w-3/4 lg:w-5/6">
           <Card 
