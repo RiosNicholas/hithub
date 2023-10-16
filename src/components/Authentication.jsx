@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const CLIENT_ID = import.meta.env.VITE_APP_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_APP_SPOTIFY_CLIENT_SECRET;
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const REDIRECT_URI = 'http://localhost:5173/callback'; 
+const REDIRECT_URI = 'http://localhost:5173'; 
 const RESPONSE_TYPE = 'token';
 
 const params = new URLSearchParams(window.location.search);
