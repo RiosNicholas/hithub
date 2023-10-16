@@ -9,8 +9,8 @@ import NavBar from './components/NavBar'
 import Authentication from './components/Authentication';
 
 function App() {
-  
   const [accessToken, setAccessToken] = useState("");
+
   useEffect(() => {
     // Spotify API Access Token
     const authParameters = {
@@ -33,31 +33,7 @@ function App() {
       .catch(error => console.error('Error:', error))
   }, [])
 
-  /* SPOTIFY ACCOUNT AUTHENTICATION */
-  const redirectToAuthCodeFlow = async(CLIENT_ID) => {
-    //TODO
-  }
 
-  /* FETCH USER PROFILE WITH ACCESS TOKEN */
-  const fetchProfile = async(token) => {
-    try {
-      const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", 
-        headers: { Authorization: 'Bearer ' + accessToken }
-      });
-      
-      if (result.ok) {
-        const profileData = await result.json();
-        return profileData;
-      } else {
-        throw new Error('Failed to fetch user profile');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-
-  }
-  
   return (
     <div className="flex w-screen h-screen">
       <aside className="bg-gray-700 bg-opacity-40 py-10 flex flex-col items-center w-1/4 lg:w-1/6">
