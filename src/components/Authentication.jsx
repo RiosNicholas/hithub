@@ -65,23 +65,17 @@ export async function getAccessToken(clientId, code) {
     return access_token;
 }
 
-async function fetchProfile(token) {
-    const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
 
-    return await result.json();
-}
+const Authentication = ( ) => {
+  const [accessToken, setAccessToken] = useState('');
 
-
-const Authentication = ({ accessToken }) => {
   const handleLoginClick = async() => {
     if (!code) {
         redirectToAuthCodeFlow(CLIENT_ID);
     } else {
-        const accessToken = await getAccessToken(CLIENT_ID, code);
-        const profile = await fetchProfile(accessToken);
-        populateUI(profile);
+        const token = await getAccessToken(CLIENT_ID, code);
+        setAccessToken(token);
+        console.log(accessToken)
     }
   };
 
