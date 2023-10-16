@@ -67,17 +67,27 @@ export async function getAccessToken(clientId, code) {
 
 
 const Authentication = ( ) => {
-  const [accessToken, setAccessToken] = useState('');
-
   const handleLoginClick = async() => {
     if (!code) {
         redirectToAuthCodeFlow(CLIENT_ID);
     } else {
-        const token = await getAccessToken(CLIENT_ID, code);
-        setAccessToken(token);
+        const accessToken = await getAccessToken(CLIENT_ID, code);
+        localStorage.setItem('access_token', accessToken); 
         console.log(accessToken)
     }
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    if (code) {
+      (async () => {
+        const accessToken = await getAccessToken(CLIENT_ID, code);
+        localStorage.setItem('access_token', accessToken);
+        console.log(accessToken);
+      })();
+    }
+  }, []);
 
   return (
     <button className='bg-green-800 hover:border-green-500' onClick={handleLoginClick}>
