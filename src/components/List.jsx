@@ -5,15 +5,14 @@ const List = () => {
     const [topTracks, setTopTracks] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
-  
+    let accessToken = localStorage.getItem('access_token');
+    
     useEffect(() => {
+        // FIXME: seems that the accesstoken is being passed as null until the end. authentication component should be mounting first
         const getTopTracks = async () => {
             try {
                 // API endpoint for top tracks
                 const endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50';
-                
-                // Retrieve the access token from local storage
-                const accessToken = localStorage.getItem('access_token');
                 
                 // Define the request headers with the access token for authentication.
                 const headers = {
@@ -29,6 +28,7 @@ const List = () => {
                     const tracks = data.items;
                     setTopTracks(tracks);
                 } else {
+                    console.log(accessToken)
                     console.error(`Error: Status ${response.status}`);
                     console.log(await response.json());
                 }
@@ -38,7 +38,7 @@ const List = () => {
         };
 
         getTopTracks();
-    }, []);
+    }, [accessToken]);
     
     return (
         <>
