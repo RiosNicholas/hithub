@@ -9,30 +9,7 @@ import NavBar from './components/NavBar'
 import Authentication from './components/Authentication';
 
 function App() {
-  const [accessToken, setAccessToken] = useState("");
-
-  useEffect(() => {
-    // Spotify API Access Token
-    const authParameters = {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + btoa(CLIENT_ID + ':' + CLIENT_SECRET),
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-    }
-
-    fetch('https://accounts.spotify.com/api/token', authParameters)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to retrieve access token');
-        }
-        return response.json();
-      })
-      .then(data => setAccessToken(data.access_token))
-      .catch(error => console.error('Error:', error))
-  }, [])
-
+  const accessToken = localStorage.getItem('access_token');
 
   return (
     <div className="flex w-screen h-screen">
@@ -55,9 +32,7 @@ function App() {
             <Card 
               title='Top Tracks of the Month'
               content={
-                <List 
-                  accessToken = {accessToken}
-                />
+                <List />
                 
               }
               className='col-span-3'
